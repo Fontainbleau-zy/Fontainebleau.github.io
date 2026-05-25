@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海南热带海洋学院棒垒球协会</title>
+    <meta name="description" content="海南热带海洋学院棒垒球协会官方网站 - 协会介绍、球队风采、比赛信息、捐赠公示">
+    <style>
+        :root {
+            --primary: #C41E3A;
+            --primary-dark: #8B0000;
+            --secondary: #1a3a5c;
+            --accent: #F5A623;
+            --accent-light: #FFD166;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-gray: #5a5a6e;
+            --text-light: #8a8a9a;
+            --border: #e8e8ef;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.10);
+            --shadow-lg: 0 20px 50px rgba(0,0,0,0.14);
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+            --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-heading: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+            --font-body: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        /* 🥎 全局棒球光标 */
+        html, body, * {
+            cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDMyIDMyIj48Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSIxNCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI0M0MUUzQSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBkPSJNOCw4IEMxNiwxNiAxNiwxNiAyNCw4IiBmaWxsPSJub25lIiBzdHJva2U9IiNDNDFFM0EiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik04LDI0IEMxNiwxNiAxNiwxNiAyNCwyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzQxRTNBIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=') 16 16, auto;
+        }
+        input, textarea, [contenteditable] { cursor: auto; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: var(--bg-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ========= 导航栏 ========= */
+        .navbar {
+            position: fixed; top:0; left:0; width:100%; z-index:1000;
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid transparent;
+            transition: all var(--transition);
+        }
+        .navbar.scrolled { border-bottom-color: var(--border); box-shadow: var(--shadow-sm); background: rgba(255,255,255,0.95); }
+        .nav-inner {
+            max-width: 1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between;
+            padding:0 24px; height:64px;
+        }
+        .nav-logo {
+            display:flex; align-items:center; gap:10px; text-decoration:none;
+            font-weight:700; font-size:1.2rem; color:var(--text-dark); font-family:var(--font-heading);
+            letter-spacing: -0.3px; cursor: pointer; position: relative;
+        }
+        .nav-logo .logo-icon {
+            width:40px; height:40px; background:var(--primary); border-radius:50%;
+            display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.3rem;
+            position: relative; overflow:hidden; transition: transform 0.3s ease;
+        }
+        .nav-logo:hover .logo-icon { transform: rotate(15deg) scale(1.05); }
+        .nav-logo .logo-icon::after {
+            content:''; position:absolute; width:18px; height:2px; background:#fff; border-radius:1px;
+            top:50%; left:50%; transform:translate(-50%,-50%) rotate(-30deg);
+        }
+        .nav-logo .logo-dot {
+            width:7px; height:7px; background:#fff; border-radius:50%; position:absolute; top:11px; left:50%;
+            transform:translateX(-50%); z-index:1;
+        }
+        .nav-links {
+            display:flex; list-style:none; gap:6px; align-items:center;
+        }
+        .nav-links a {
+            text-decoration:none; color:var(--text-gray); font-weight:500; padding:8px 16px;
+            border-radius:20px; transition:all var(--transition); font-size:0.95rem; white-space:nowrap;
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+        /* 导航下划线动画 */
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%) scaleX(0);
+            width: 60%; height: 2px; background: var(--primary); border-radius: 1px;
+            transition: transform 0.3s ease;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { transform: translateX(-50%) scaleX(1); }
+        .nav-links a:hover, .nav-links a.active {
+            color:var(--primary); background:rgba(196,30,58,0.06);
+        }
+        .nav-links .btn-donate-nav {
+            background:var(--primary); color:#fff; padding:9px 20px; border-radius:22px; font-weight:600;
+            margin-left:6px;
+        }
+        .nav-links .btn-donate-nav::after { display: none; }
+        .nav-links .btn-donate-nav:hover {
+            background:var(--primary-dark); color:#fff; box-shadow:0 4px 14px rgba(196,30,58,0.35);
+        }
+
+        /* 移动菜单按钮 */
+        .menu-toggle {
+            display:none; background:none; border:none; cursor:pointer; padding:8px;
+            flex-direction:column; gap:5px; z-index:1001;
+        }
+        .menu-toggle span { display:block; width:26px; height:2.5px; background:var(--text-dark); border-radius:3px; transition:all var(--transition); }
+        .menu-toggle.active span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+        .menu-toggle.active span:nth-child(2) { opacity:0; }
+        .menu-toggle.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
+        /* 内容区域 */
+        .main-content { flex:1; padding-top:64px; }
+        .panel { display: none; animation: fadeInPanel 0.4s ease forwards; }
+        .panel.active { display: block; }
+        @keyframes fadeInPanel {
+            from { opacity:0; transform:translateY(12px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+
+        /* 通用区块 */
+        .section { padding: 70px 24px 80px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-label {
+            display: inline-block; font-size: 0.85rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+            color: var(--primary); background:rgba(196,30,58,0.07); padding:6px 18px; border-radius:20px;
+            margin-bottom: 12px; animation: floatLight 3s ease-in-out infinite;
+        }
+        .section-title {
+            font-family: var(--font-heading); font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight:700; color:var(--text-dark); letter-spacing:-0.5px; margin-bottom: 8px;
+        }
+        .section-desc { color:var(--text-gray); max-width:600px; margin:0 auto; font-size:1.05rem; }
+
+        /* 浮动动画 */
+        @keyframes floatLight {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-6px); }
+        }
+        @keyframes glowPulse {
+            0%,100%{ text-shadow: 0 0 8px rgba(196,30,58,0.3); }
+            50%{ text-shadow: 0 0 18px rgba(196,30,58,0.6); }
+        }
+
+        /* ========= 协会介绍 ========= */
+        .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+        .about-image-wrapper {
+            position:relative; border-radius:var(--radius-lg); overflow:hidden;
+            aspect-ratio:4/3; background:linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%);
+            display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-lg);
+            transition: transform 0.3s ease;
+        }
+        .about-image-wrapper:hover { transform: scale(1.02); }
+        .about-image-placeholder { text-align:center; color:#fff; padding:40px; }
+        .about-image-placeholder .big-emoji { font-size:5rem; display:block; margin-bottom:12px; animation: swing 3s ease-in-out infinite; }
+        @keyframes swing { 0%,100%{transform:rotate(-5deg);} 50%{transform:rotate(5deg);} }
+        .about-text h3 { font-family:var(--font-heading); font-size:1.6rem; margin-bottom:16px; color:var(--text-dark); }
+        .about-text p { color:var(--text-gray); margin-bottom:14px; font-size:1rem; }
+        .about-stats { display:flex; gap:28px; margin-top:24px; flex-wrap:wrap; }
+        .stat-item { text-align:center; flex:1; min-width:80px; }
+        .stat-number { font-family:var(--font-heading); font-size:2.2rem; font-weight:800; color:var(--primary); display:block; transition: all 0.3s; }
+        .stat-label { font-size:0.85rem; color:var(--text-light); font-weight:500; }
+
+        /* ========= 球队风采 ========= */
+        .team-section-bg { background:var(--bg-white); }
+        .team-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:24px; }
+        .team-card {
+            background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm);
+            transition:all var(--transition); border:1px solid var(--border); text-align:center; padding-bottom:20px;
+            cursor: pointer; position: relative;
+        }
+        .team-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .team-card:hover::after { left: 100%; }
+        .team-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-md); border-color:transparent; }
+        .team-card-avatar {
+            width:100%; height:220px; background:linear-gradient(135deg, #e8ecf1 0%, #d5dbe3 100%);
+            display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+        }
+        .team-card-avatar .avatar-emoji { font-size:5rem; transition:transform var(--transition); }
+        .team-card:hover .avatar-emoji { transform:scale(1.1) rotate(5deg); }
+        .team-card-avatar .position-tag {
+            position:absolute; bottom:12px; right:12px; background:var(--primary); color:#fff;
+            padding:5px 14px; border-radius:14px; font-size:0.78rem; font-weight:600; letter-spacing:0.5px;
+        }
+        .team-card h4 { font-family:var(--font-heading); font-size:1.15rem; margin-top:16px; color:var(--text-dark); }
+        .team-card .role { font-size:0.85rem; color:var(--primary); font-weight:600; margin-bottom:6px; }
+        .team-card .bio { font-size:0.85rem; color:var(--text-light); padding:0 16px; }
+
+        /* ========= 比赛信息 ========= */
+        .matches-list { display:flex; flex-direction:column; gap:16px; max-width:800px; margin:0 auto; }
+        .match-card {
+            background:#fff; border-radius:var(--radius); padding:20px 24px; display:flex; align-items:center;
+            gap:20px; box-shadow:var(--shadow-sm); border:1px solid var(--border); transition:all var(--transition);
+            flex-wrap:wrap; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .match-card::before {
+            content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
+            background: var(--primary); transform: scaleY(0); transition: transform 0.3s ease;
+        }
+        .match-card:hover::before { transform: scaleY(1); }
+        .match-card:hover { box-shadow:var(--shadow-md); border-color:transparent; transform: translateX(6px); }
+        .match-date {
+            flex-shrink:0; text-align:center; background:var(--bg-light); border-radius:var(--radius-sm);
+            padding:10px 16px; min-width:70px;
+        }
+        .match-date .day { font-size:1.6rem; font-weight:800; color:var(--primary); line-height:1; }
+        .match-date .month { font-size:0.8rem; color:var(--text-light); font-weight:600; text-transform:uppercase; }
+        .match-info { flex:1; min-width:180px; }
+        .match-info .teams { font-weight:700; font-size:1.05rem; color:var(--text-dark); font-family:var(--font-heading); }
+        .match-info .details { font-size:0.85rem; color:var(--text-light); margin-top:2px; }
+        .match-status {
+            flex-shrink:0; padding:7px 16px; border-radius:18px; font-weight:700; font-size:0.82rem;
+            letter-spacing:0.5px; white-space:nowrap;
+        }
+        .status-upcoming { background:#FFF3CD; color:#856404; }
+        .status-completed { background:#D4EDDA; color:#155724; }
+        .status-ongoing { background:#FCE4EC; color:#C41E3A; animation: pulse 1.8s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.6;} }
+        .match-score {
+            flex-shrink:0; font-weight:800; font-size:1.3rem; font-family:var(--font-heading);
+            color:var(--text-dark); text-align:center; min-width:60px;
+        }
+        .match-score .score-win { color:#28a745; }
+        .match-score .score-loss { color:#dc3545; }
+
+        /* ========= 捐赠公示 ========= */
+        .donation-section-bg { background:linear-gradient(180deg, #fdfdff 0%, #f0f2f8 100%); }
+        .donation-intro { text-align:center; max-width:600px; margin:0 auto 40px; color:var(--text-gray); font-size:1rem; }
+        .donation-cards { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap:20px; max-width:900px; margin:0 auto 48px; }
+        .donation-card {
+            background:#fff; border-radius:var(--radius); padding:22px; box-shadow:var(--shadow-sm);
+            border:1px solid var(--border); transition:all var(--transition); display:flex; align-items:center; gap:16px;
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+        .donation-card::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245,166,35,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .donation-card:hover::after { left: 100%; }
+        .donation-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); border-color:transparent; }
+        .donation-card .donor-avatar {
+            width:50px; height:50px; border-radius:50%; flex-shrink:0; display:flex; align-items:center;
+            justify-content:center; font-size:1.6rem; background:var(--bg-light);
+            transition: transform 0.3s ease;
+        }
+        .donation-card:hover .donor-avatar { transform: rotate(10deg) scale(1.1); }
+        .donation-card .donor-info { flex:1; min-width:0; }
+        .donation-card .donor-name { font-weight:700; color:var(--text-dark); font-size:0.95rem; }
+        .donation-card .donor-date { font-size:0.78rem; color:var(--text-light); }
+        .donation-card .donor-amount {
+            font-weight:800; font-size:1.1rem; color:var(--accent); flex-shrink:0; font-family:var(--font-heading);
+            transition: transform 0.3s ease;
+        }
+        .donation-card:hover .donor-amount { transform: scale(1.1); }
+        .donation-summary {
+            text-align:center; background:#fff; border-radius:var(--radius-lg); padding:32px 24px;
+            max-width:500px; margin:0 auto; box-shadow:var(--shadow-md); border:2px solid var(--accent);
+        }
+        .donation-summary .total-amount { font-family:var(--font-heading); font-size:2.8rem; font-weight:800; color:var(--primary); display:block; animation: glowPulse 2s infinite; }
+        .donation-summary .total-label { color:var(--text-gray); font-size:0.9rem; margin-bottom:4px; }
+        .donation-summary .thank-you { margin-top:10px; font-weight:600; color:var(--text-dark); }
+
+        /* 滚动动画初始隐藏 */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* 按钮涟漪效果 */
+        .ripple {
+            position: relative; overflow: hidden;
+        }
+        .ripple::after {
+            content: ''; position: absolute; border-radius: 50%; background: rgba(255,255,255,0.5);
+            width: 100px; height: 100px; margin-top: -50px; margin-left: -50px;
+            top: 50%; left: 50%; transform: scale(0); opacity: 1;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+        .ripple:active::after { transform: scale(4); opacity: 0; }
+
+        /* 页脚 */
+        .footer {
+            background:#0d1b2a; color:rgba(255,255,255,0.7); padding:48px 24px 28px; text-align:center;
+        }
+        .footer-inner { max-width:800px; margin:0 auto; }
+        .footer h4 { color:#fff; font-family:var(--font-heading); font-size:1.3rem; margin-bottom:8px; }
+        .footer p { font-size:0.9rem; margin-bottom:6px; }
+        .footer .social-links { display:flex; gap:16px; justify-content:center; margin:20px 0; }
+        .footer .social-links a {
+            width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.08);
+            display:flex; align-items:center; justify-content:center; color:#fff; text-decoration:none;
+            transition:all var(--transition); font-size:1.1rem;
+        }
+        .footer .social-links a:hover { background:var(--primary); transform:translateY(-3px) rotate(360deg); }
+
+        /* 响应式 */
+        @media (max-width:900px) {
+            .about-grid { grid-template-columns:1fr; gap:28px; }
+            .nav-links {
+                position:fixed; top:0; right:-100%; width:280px; height:100vh; background:#fff;
+                flex-direction:column; padding:80px 28px 40px; gap:8px; box-shadow:var(--shadow-lg);
+                transition: right var(--transition); z-index:1000; align-items:stretch;
+            }
+            .nav-links.active { right:0; }
+            .nav-links a { display:block; padding:12px 16px; border-radius:10px; text-align:left; }
+            .menu-toggle { display:flex; }
+            .mobile-overlay {
+                position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:999; opacity:0;
+                pointer-events:none; transition:opacity var(--transition);
+            }
+            .mobile-overlay.active { opacity:1; pointer-events:auto; }
+        }
+        @media (max-width:600px) {
+            .section { padding:56px 16px; }
+            .match-card { flex-direction:column; text-align:center; gap:10px; }
+            .donation-cards { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a class="nav-logo" data-panel="home">
+                <span class="logo-icon"><span class="logo-dot"></span></span>
+                棒垒球协会
+            </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a data-panel="about" class="nav-item active">协会介绍</a></li>
+                <li><a data-panel="team" class="nav-item">球队风采</a></li>
+                <li><a data-panel="matches" class="nav-item">比赛信息</a></li>
+                <li><a data-panel="donation" class="nav-item">捐赠公示</a></li>
+                <li><a data-panel="donation" class="btn-donate-nav ripple">💝 支持我们</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <div class="main-content" id="mainContent">
+        <!-- 首页 Hero -->
+        <div class="panel active" id="panel-home">
+            <div style="min-height:90vh; display:flex; align-items:center; justify-content:center; position:relative; background:linear-gradient(160deg, #0d1b2a 0%, #1a3a5c 30%, #162d42 60%, #0d1b2a 100%); overflow:hidden;">
+                <div style="position:absolute; inset:0; opacity:0.06; background-image: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);"></div>
+                <div style="text-align:center; padding:40px 24px; max-width:780px; z-index:2;">
+                    <div style="display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#FFD166; padding:8px 22px; border-radius:30px; font-size:0.9rem; font-weight:600; letter-spacing:1.5px; margin-bottom:28px; animation: floatLight 3s infinite;">⚾ 海南热带海洋学院 · 棒垒球协会</div>
+                    <h1 style="font-family:var(--font-heading); font-size:clamp(2.4rem,5.5vw,3.8rem); font-weight:800; color:#fff; line-height:1.2; margin-bottom:10px; animation: glowPulse 3s infinite;">挥棒出击<span style="color:#e8455b;">·</span><br>燃动<span style="color:#F5A623;">青春</span>赛场</h1>
+                    <p style="font-size:1.2rem; color:rgba(255,255,255,0.7); margin-bottom:36px;">以棒球之名，聚热海之力。我们在海南热带海洋学院，用汗水浇灌热爱，用团队书写荣耀。</p>
+                    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+                        <button class="ripple" style="padding:13px 28px; border-radius:28px; font-weight:600; background:#C41E3A; color:#fff; border:none; cursor:pointer; box-shadow:0 6px 22px rgba(196,30,58,0.35);" onclick="switchPanel('about')">🔍 了解协会</button>
+                        <button class="ripple" style="padding:13px 28px; border-radius:28px; font-weight:600; background:transparent; color:#fff; border:2px solid rgba(255,255,255,0.4); cursor:pointer;" onclick="switchPanel('team')">👥 认识球队</button>
+                        <button class="ripple" style="padding:13px 28px; border-radius:28px; font-weight:600; background:#F5A623; color:#1a1a2e; border:none; cursor:pointer; box-shadow:0 6px 22px rgba(245,166,35,0.35);" onclick="switchPanel('donation')">💛 爱心捐赠</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 协会介绍 -->
+        <div class="panel" id="panel-about">
+            <div class="section">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-label">About Us</span>
+                    <h2 class="section-title">协会介绍</h2>
+                    <p class="section-desc">海南热带海洋学院棒垒球协会，成立于对棒垒球运动的热爱之中，致力于推广校园棒垒球文化。</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-image-wrapper animate-on-scroll">
+                        <div class="about-image-placeholder"><span class="big-emoji">⚾</span><p>海南热带海洋学院棒垒球协会</p></div>
+                    </div>
+                    <div class="about-text animate-on-scroll">
+                        <h3>🏟️ 我们的故事</h3>
+                        <p>海南热带海洋学院棒垒球协会成立于<strong>2018年</strong>，是校内最具活力的体育社团之一。我们汇聚了一群热爱棒球与垒球的热血青年，在椰风海韵中挥洒汗水，在绿茵场上追逐梦想。</p>
+                        <p>协会秉承<strong>"团结、拼搏、尊重、超越"</strong>的精神，定期组织训练、友谊赛和校际交流活动，为每一位成员提供成长与展示的舞台。</p>
+                        <div class="about-stats">
+                            <div class="stat-item"><span class="stat-number" data-target="6">0</span><span class="stat-label">成立年数</span></div>
+                            <div class="stat-item"><span class="stat-number" data-target="80">0</span><span class="stat-label">活跃成员</span></div>
+                            <div class="stat-item"><span class="stat-number" data-target="15">0</span><span class="stat-label">年度赛事</span></div>
+                            <div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-label">冠军奖杯</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 球队风采 -->
+        <div class="panel" id="panel-team">
+            <div class="team-section-bg">
+                <div class="section">
+                    <div class="section-header animate-on-scroll">
+                        <span class="section-label">Team</span>
+                        <h2 class="section-title">球队风采</h2>
+                        <p class="section-desc">我们的队伍由一群充满激情的队员组成，每个人都是团队不可或缺的力量。</p>
+                    </div>
+                    <div class="team-grid">
+                        <div class="team-card animate-on-scroll"><div class="team-card-avatar"><span class="avatar-emoji">🧢</span><span class="position-tag">队长</span></div><h4>林海峰</h4><p class="role">投手 · Pitcher</p><p class="bio">"精准制导，掌控全场节奏。"</p></div>
+                        <div class="team-card animate-on-scroll"><div class="team-card-avatar"><span class="avatar-emoji">🦾</span><span class="position-tag">副队长</span></div><h4>陈振宇</h4><p class="role">捕手 · Catcher</p><p class="bio">"稳如磐石的后防核心。"</p></div>
+                        <div class="team-card animate-on-scroll"><div class="team-card-avatar"><span class="avatar-emoji">⚡</span><span class="position-tag">主力</span></div><h4>王思远</h4><p class="role">游击手 · Shortstop</p><p class="bio">"速度与敏捷的化身。"</p></div>
+                        <div class="team-card animate-on-scroll"><div class="team-card-avatar"><span class="avatar-emoji">💪</span><span class="position-tag">强棒</span></div><h4>赵大力</h4><p class="role">一垒手 · First Baseman</p><p class="bio">"重炮出击，每一次挥棒都让对手胆寒。"</p></div>
+                        <div class="team-card animate-on-scroll"><div class="team-card-avatar"><span class="avatar-emoji">🌟</span><span class="position-tag">新星</span></div><h4>李梦琪</h4><p class="role">外野手 · Outfielder</p><p class="bio">"追逐每一颗飞球。"</p></div>
+                        <div class="team-card animate-on-scroll"><div class="team-card-avatar"><span class="avatar-emoji">🎯</span><span class="position-tag">教练</span></div><h4>张指导</h4><p class="role">主教练 · Head Coach</p><p class="bio">"用心雕琢每一位队员的潜力。"</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 比赛信息 -->
+        <div class="panel" id="panel-matches">
+            <div class="section">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-label">Matches</span>
+                    <h2 class="section-title">比赛信息</h2>
+                    <p class="section-desc">关注我们的赛程安排，为球队加油助威！</p>
+                </div>
+                <div class="matches-list">
+                    <div class="match-card animate-on-scroll"><div class="match-date"><span class="day">25</span><span class="month">5月</span></div><div class="match-info"><p class="teams">🔥 热海棒协 VS 琼州学院联队</p><p class="details">📍 校本部棒球场 · 🕐 15:00</p></div><span class="match-status status-upcoming">即将进行</span></div>
+                    <div class="match-card animate-on-scroll"><div class="match-date"><span class="day">18</span><span class="month">5月</span></div><div class="match-info"><p class="teams">热海棒协 VS 三亚学院棒球队</p><p class="details">📍 三亚学院体育场 · 🕐 14:30</p></div><div class="match-score"><span class="score-win">8 : 5</span></div><span class="match-status status-completed">已结束 · 胜</span></div>
+                    <div class="match-card animate-on-scroll"><div class="match-date"><span class="day">10</span><span class="month">5月</span></div><div class="match-info"><p class="teams">热海棒协 VS 海口高校联队</p><p class="details">📍 校本部棒球场 · 🕐 16:00</p></div><div class="match-score"><span class="score-loss">3 : 6</span></div><span class="match-status status-completed">已结束 · 负</span></div>
+                    <div class="match-card animate-on-scroll"><div class="match-date"><span class="day">28</span><span class="month">5月</span></div><div class="match-info"><p class="teams">🔥 海南省大学生棒垒球联赛</p><p class="details">📍 海口体育中心 · 🕐 全天</p></div><span class="match-status status-ongoing">🏆 锦标赛</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 捐赠公示 -->
+        <div class="panel" id="panel-donation">
+            <div class="donation-section-bg">
+                <div class="section">
+                    <div class="section-header animate-on-scroll">
+                        <span class="section-label">Donation</span>
+                        <h2 class="section-title">捐赠公示</h2>
+                        <p class="section-desc">感谢每一位支持我们的朋友，您的爱心是球队前行的动力。</p>
+                    </div>
+                    <p class="donation-intro animate-on-scroll">💡 所有捐赠将用于购买训练器材、比赛装备及赛事组织。我们定期公示捐赠明细，确保公开透明。</p>
+                    <div class="donation-cards">
+                        <div class="donation-card animate-on-scroll"><div class="donor-avatar">👨‍🎓</div><div class="donor-info"><p class="donor-name">03级校友·王学长</p><p class="donor-date">2026年5月15日</p></div><span class="donor-amount">¥2,000</span></div>
+                        <div class="donation-card animate-on-scroll"><div class="donor-avatar">👩‍💼</div><div class="donor-info"><p class="donor-name">热心家长·李女士</p><p class="donor-date">2026年5月10日</p></div><span class="donor-amount">¥1,500</span></div>
+                        <div class="donation-card animate-on-scroll"><div class="donor-avatar">🏢</div><div class="donor-info"><p class="donor-name">本地企业·三亚阳光体育</p><p class="donor-date">2026年4月28日</p></div><span class="donor-amount">¥5,000</span></div>
+                        <div class="donation-card animate-on-scroll"><div class="donor-avatar">👨‍🏫</div><div class="donor-info"><p class="donor-name">体育学院·刘老师</p><p class="donor-date">2026年4月20日</p></div><span class="donor-amount">¥800</span></div>
+                        <div class="donation-card animate-on-scroll"><div class="donor-avatar">🎓</div><div class="donor-info"><p class="donor-name">18级毕业生集体</p><p class="donor-date">2026年4月12日</p></div><span class="donor-amount">¥3,200</span></div>
+                        <div class="donation-card animate-on-scroll"><div class="donor-avatar">🙋</div><div class="donor-info"><p class="donor-name">匿名爱心人士</p><p class="donor-date">2026年4月5日</p></div><span class="donor-amount">¥500</span></div>
+                    </div>
+                    <div class="donation-summary animate-on-scroll">
+                        <span class="total-label">累计收到捐赠</span>
+                        <span class="total-amount" id="totalDonation">¥13,000</span>
+                        <p class="thank-you">🙏 衷心感谢每一位捐赠者的慷慨支持！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <h4>⚾ 海南热带海洋学院棒垒球协会</h4>
+            <p>📍 海南省三亚市育才路1号 · 海南热带海洋学院</p>
+            <p>📧 contact@hnu-baseball.cn | 📱 公众号：热海棒垒球</p>
+            <div class="social-links">
+                <a href="#">💬</a><a href="#">📢</a><a href="#">🎬</a><a href="#">📺</a>
+            </div>
+            <div class="divider"></div>
+            <p class="copyright">© 2026 海南热带海洋学院棒垒球协会 · 版权所有</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // 面板切换
+            const panels = document.querySelectorAll('.panel');
+            const navItems = document.querySelectorAll('.nav-item');
+            const navbar = document.getElementById('navbar');
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+
+            function getPanelFromHash() {
+                const hash = window.location.hash.substring(1);
+                return (hash && document.getElementById('panel-' + hash)) ? hash : 'home';
+            }
+
+            window.switchPanel = function(panelId) {
+                panels.forEach(p => p.classList.remove('active'));
+                const target = document.getElementById('panel-' + panelId);
+                if (target) {
+                    target.classList.add('active');
+                    history.pushState(null, null, '#' + panelId);
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('data-panel') === panelId) item.classList.add('active');
+                    });
+                    if (panelId === 'home') navItems.forEach(item => item.classList.remove('active'));
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    closeMenu();
+                    // 触发新面板内的动画
+                    setTimeout(() => {
+                        observeAnimatedElements();
+                        if (panelId === 'about') runCounterAnimation();
+                        if (panelId === 'donation') runDonationAnimation();
+                    }, 100);
+                }
+            };
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const panel = this.getAttribute('data-panel');
+                    if (panel) switchPanel(panel);
+                });
+            });
+
+            document.querySelector('.btn-donate-nav').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPanel('donation');
+            });
+
+            document.querySelector('.nav-logo').addEventListener('click', function(e) {
+                e.preventDefault();
+                switchPanel('home');
+            });
+
+            window.addEventListener('popstate', function() {
+                const panelId = getPanelFromHash();
+                panels.forEach(p => p.classList.remove('active'));
+                const target = document.getElementById('panel-' + panelId);
+                if (target) target.classList.add('active');
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('data-panel') === panelId) item.classList.add('active');
+                });
+                if (panelId === 'home') navItems.forEach(item => item.classList.remove('active'));
+                setTimeout(() => {
+                    observeAnimatedElements();
+                    if (panelId === 'about') runCounterAnimation();
+                    if (panelId === 'donation') runDonationAnimation();
+                }, 100);
+            });
+
+            // 初始加载
+            const initialPanel = getPanelFromHash();
+            panels.forEach(p => p.classList.remove('active'));
+            document.getElementById('panel-' + initialPanel).classList.add('active');
+            navItems.forEach(item => {
+                if (item.getAttribute('data-panel') === initialPanel) item.classList.add('active');
+            });
+            if (initialPanel === 'home') navItems.forEach(item => item.classList.remove('active'));
+
+            // 滚动导航效果
+            function updateNavbarScroll() {
+                if (window.scrollY > 40) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            }
+            window.addEventListener('scroll', updateNavbarScroll, { passive: true });
+            updateNavbarScroll();
+
+            // 移动菜单
+            function openMenu() {
+                navLinks.classList.add('active');
+                menuToggle.classList.add('active');
+                mobileOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.contains('active') ? closeMenu() : openMenu();
+            });
+            mobileOverlay.addEventListener('click', closeMenu);
+            navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+            // 滚动动画观察器
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            function observeAnimatedElements() {
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+            observeAnimatedElements();
+
+            // 数字递增动画 (协会统计)
+            function runCounterAnimation() {
+                const statNumbers = document.querySelectorAll('#panel-about .stat-number');
+                statNumbers.forEach(el => {
+                    const target = parseInt(el.getAttribute('data-target') || el.innerText);
+                    if (isNaN(target)) return;
+                    let current = 0;
+                    const increment = target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        el.innerText = Math.floor(current) + (target === 6 || target === 3 ? '+' : '+');
+                    }, 40);
+                });
+            }
+
+            // 捐赠总额动画
+            function runDonationAnimation() {
+                const totalEl = document.getElementById('totalDonation');
+                if (!totalEl) return;
+                const finalText = '¥13,000';
+                totalEl.innerText = '¥0';
+                let progress = 0;
+                const timer = setInterval(() => {
+                    progress += 433; // 13000/30 ≈433
+                    if (progress >= 13000) {
+                        progress = 13000;
+                        clearInterval(timer);
+                    }
+                    totalEl.innerText = '¥' + progress.toLocaleString();
+                }, 40);
+            }
+
+            // 初次加载时如果可见就运行动画
+            if (initialPanel === 'about') runCounterAnimation();
+            if (initialPanel === 'donation') runDonationAnimation();
+
+            console.log('⚾ 海南热带海洋学院棒垒球协会网站已启动，动画效果已激活！');
+        })();
+    </script>
+</body>
+</html>
